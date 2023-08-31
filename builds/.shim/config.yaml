@@ -1,0 +1,8 @@
+---
+global:
+    name: analytics-logger
+    environment: demo
+    language: node
+infra:
+
+

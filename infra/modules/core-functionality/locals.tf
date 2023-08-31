@@ -1,0 +1,15 @@
+locals {
+    config                              = yamldecode(var.config)
+    global_config                       = lookup(local.config, "global", {})
+    infrastructure_config               = lookup(local.config, "infrastructure", {})
+    environment_variables_config        = lookup(local.config, "env", [])
+    lambda_environment_variables_config = lookup(local.config, "lambda-env", [])
+    dependencies_config                 = lookup(local.config, "dependencies", [])
+    dependencies_services_config        = lookup(local.dependencies_config, "services", [])
+    dependencies_shared_config          = try(lookup(local.dependencies_config, "shared", []))
+    storage_config                      = lookup(local.infrastructure_config, "storage", {})
+    database_config                     = lookup(local.infrastructure_config, "database", {})
+    cache_config                        = lookup(local.infrastructure_config, "cache", {})
+    queue_config                        = lookup(local.infrastructure_config, "queue", {})
+    serverless_config                   = lookup(local.infrastructure_config, "serverless", {})
+}
