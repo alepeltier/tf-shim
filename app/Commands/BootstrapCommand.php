@@ -21,11 +21,19 @@ class BootstrapCommand extends Command
                 $this->bootstrapStructure();
             });
         }
+        $this->task('Pulling in infrastructure', function () {
+            $this->cloneInfrastructure();
+        });
     }
 
     private function bootstrapStructure(): void
     {
         File::makeDirectory('.shim');
         File::makeDirectory('.shim/infra');
+    }
+
+    private function cloneInfrastructure(): void
+    {
+        exec("git clone" . env('GIT_REPO'));
     }
 }
